@@ -1,5 +1,5 @@
-export function convertNumberToWords(num: number): string {
-  if (String(num).length > 12) return "الرقم كبير جدا";
+export function convertNumberToWords(num: number): string | null {
+  if (String(num).length > 12) return null;
 
   const numbersBelowHundred: string[] = [
     "صفر",

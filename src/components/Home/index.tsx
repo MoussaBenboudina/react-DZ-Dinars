@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
-import {
-  convertNumberToWords,
-  formattedAmount,
-} from "../Convert Number to letters/index";
+import { convertNumberToWords, formattedAmount } from "../../utils/index";
 import { motion } from "framer-motion";
 
 const Home = () => {
-  const [amount, setAmount] = useState<number | null>(0);
+  const [amount, setAmount] = useState<number>(0);
   const [amountLitters, setAmountLitters] =
     useState<string>("صفر دينار جزائري");
   const [copySuccess, setCopySuccess] = useState<string>("");
@@ -14,13 +11,8 @@ const Home = () => {
     useState<string>("0.00");
 
   useEffect(() => {
-    if (amount !== null && amount !== 0) {
-      setAmountLitters(String(convertNumberToWords(amount)));
-      setFormattedAmountValue(formattedAmount(amount));
-    } else {
-      setAmountLitters("صفر دينار جزائري");
-      setFormattedAmountValue("0.00");
-    }
+    setAmountLitters(String(convertNumberToWords(amount)));
+    setFormattedAmountValue(formattedAmount(amount));
   }, [amount]);
 
   const handleCopy = () => {
@@ -37,9 +29,8 @@ const Home = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-
     if (value.length <= 12) {
-      setAmount(value === "" ? null : parseInt(value));
+      setAmount(parseInt(value));
     }
   };
 
@@ -64,9 +55,7 @@ const Home = () => {
           نسخ النص
         </button>
         {copySuccess && (
-          <span className="text-green-500 font-bold mt-2 h-12">
-            {copySuccess}
-          </span>
+          <span className="text-green-500 font-bold mt-2 ">{copySuccess}</span>
         )}
       </div>
       <div className="h-14 text-3xl">{formattedAmountValue}</div>
