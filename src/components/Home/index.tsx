@@ -11,8 +11,13 @@ const Home = () => {
     useState<string>("0.00");
 
   useEffect(() => {
-    setAmountLitters(String(convertNumberToWords(amount)));
-    setFormattedAmountValue(formattedAmount(amount));
+    if (amount !== 0) {
+      setAmountLitters(String(convertNumberToWords(amount)));
+      setFormattedAmountValue(formattedAmount(amount));
+    } else {
+      setAmountLitters("صفر دينار جزائري");
+      setFormattedAmountValue("0.00");
+    }
   }, [amount]);
 
   const handleCopy = () => {

@@ -166,5 +166,6 @@ export function convertNumberToWords(num: number): string | null {
 }
 
 export function formattedAmount(amount: number): string {
+  if (!amount || amount === 0) return "0.00";
   return amount.toLocaleString("ar-DZ") + ".00";
 }
